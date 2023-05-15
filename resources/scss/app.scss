@@ -1,0 +1,42 @@
+@import '~bootstrap/scss/bootstrap';
+
+
+.flex {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    padding-top: 40px;
+    gap: 30px;
+}
+
+.rosso {
+    background-color: #900c3f;
+    color: white;
+    text-transform: capitalize;
+
+    &:hover {
+        color: white;
+    }
+}
+
+.bianco {
+    background-color: antiquewhite;
+    text-transform: capitalize;
+}
+
+.rosè {
+    background-color: #ffd7d782;
+    text-transform: capitalize;
+    
+}
+
+
+a {
+    text-decoration: none;
+    color: black;
+
+    &:hover {
+        text-decoration: underline;
+        color: black;
+    }
+}
