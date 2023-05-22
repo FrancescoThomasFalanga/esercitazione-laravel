@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Winery extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+
+        'name',
+        'address',
+        'town',
+        'district',
+        'region',
+        'nation',
+        'phone_number',
+        'mail',
+    ];
 }

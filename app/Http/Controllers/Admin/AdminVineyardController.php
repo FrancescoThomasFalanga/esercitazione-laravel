@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\Winery;
+use App\Http\Controllers\Controller;
+use App\Models\Vineyard;
 use Illuminate\Http\Request;
 
-class WineryController extends Controller
+class AdminVineyardController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,15 +15,9 @@ class WineryController extends Controller
      */
     public function index()
     {
+        $vineyard = Vineyard::all();
 
-        // dd(request('search'));
-        if (request('search')) {
-            $wineries = Winery::where('name', 'like', '%' . request('search') . '%')->get();
-        } else {
-            $wineries = Winery::all();
-        }
-
-        return view('guest.wineries.index')->with('wineries', $wineries);
+        return view('admin.vineyard.index', compact('vineyard'));
     }
 
     /**
@@ -32,7 +27,7 @@ class WineryController extends Controller
      */
     public function create()
     {
-
+        //
     }
 
     /**
@@ -43,53 +38,51 @@ class WineryController extends Controller
      */
     public function store(Request $request)
     {
-
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Project  $project
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Winery $winery)
+    public function show(Vineyard $vineyard)
     {
-
-        return view('guest.wineries.show', compact('winery'));
-
+        return view('admin.vineyards.show', compact('vineyard'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Project  $project
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Winery $winery)
+    public function edit(Vineyard $vineyard)
     {
-
+        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Project  $project
+     * @param  int  Winery $winery
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Winery $winery)
+    public function update(Request $request, Vineyard $vineyard)
     {
-
+        //
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Project  $project
+     * @param  int  Winery $winery
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Winery $winery)
+    public function destroy(Vineyard $vineyard)
     {
-
+        //
     }
 }

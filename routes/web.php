@@ -1,10 +1,15 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\VineyardController;
 use App\Http\Controllers\WineController;
 use App\Http\Controllers\WineryController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminWineryController;
+use App\Http\Controllers\Admin\AdminWineController;
+use App\Http\Controllers\Admin\AdminVineyardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,11 +22,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/vini', [WineController::class, 'index'])->name('vini');
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Route::get('/cantine', [WineryController::class, 'index'])->name('cantine');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/vitigni', [VineyardController::class, 'index'])->name('vitigni');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+
+Route::resource('wineries', WineryController::class);
+Route::resource('wines', WineController::class);
+Route::resource('vineyards', VineyardController::class);
+
+Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function() {
+
+    Route::get('dashboard', [DashboardController::class, 'home']);
+
+    Route::resource('wineries', AdminWineryController::class);
+    Route::resource('wines', AdminWineController::class);
+    Route::resource('vineyards', AdminVineyardController::class);
+
+});
+
+
+
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -29,3 +60,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 // EXTRA
 
 Route::get('/viniExtra', [WineController::class, 'extra'])->name('viniExtra');
+
+
+require __DIR__.'/auth.php';
+

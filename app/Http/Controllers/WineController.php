@@ -10,9 +10,15 @@ class WineController extends Controller
 {
     public function index() {
 
-        $wines = Wine::all();
+        // dd(request('search'));
+        if (request('search')) {
+            $wines = Wine::where('name', 'like', '%' . request('search') . '%')->get();
+        } else {
+            $wines = Wine::all();
+        }
 
-        return view('vini', compact('wines'));
+
+        return view('vini')->with('wines', $wines);
 
     }
 
