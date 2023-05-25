@@ -20,4 +20,8 @@ class Winery extends Model
         'phone_number',
         'mail',
     ];
+
+    public function wines(){
+        return $this->hasMany(Wine::class);
+    }
 }

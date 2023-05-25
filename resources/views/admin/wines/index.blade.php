@@ -23,7 +23,6 @@
             <tbody>
 
                 @foreach ($wines as $wine)
-
                 <tr>
 
                     <td>
@@ -33,7 +32,7 @@
                         {{$wine->year}}
                     </td>
                     <td>
-                        {{$wine->winery}}
+                        {{$wine->winery?->name}}
                     </td>
                     <td>
                         {{$wine->color}}

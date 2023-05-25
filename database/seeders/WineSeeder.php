@@ -24,7 +24,7 @@ class WineSeeder extends Seeder
 
             $newWine->name = $faker->word();
             $newWine->year = $faker->numberBetween(1800, 2023);
-            $newWine->winery = $faker->company();
+            // $newWine->winery = $faker->company();
             $newWine->color = $faker->randomElement(['bianco', 'rosso', 'rosè']);
             $newWine->type = $faker->randomElement(['fermo', 'frizzante', 'passito']);
             $newWine->gradation = $faker->randomFloat(2, 6, 30);

@@ -18,7 +18,7 @@ return new class extends Migration
 
             $table->string('name', 50);
             $table->smallInteger('year');
-            $table->string('winery', 50);
+            // $table->string('winery', 50);
             $table->string('color', 50);
             $table->string('type', 50);
             $table->float('gradation');

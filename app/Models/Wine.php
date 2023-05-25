@@ -12,11 +12,14 @@ class Wine extends Model
     protected $fillable = [
         'name',
         'year',
-        'winery',
         'color',
         'type',
         'gradation',
         'extract',
         'acidity',
     ];
+
+    public function winery(){
+       return $this->belongsTo(Winery::class);
+    }
 }
