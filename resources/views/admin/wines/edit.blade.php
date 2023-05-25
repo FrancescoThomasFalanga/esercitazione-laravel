@@ -68,6 +68,25 @@
 
         <div class="row">
 
+            @foreach($vineyards as $vineyard)
+            @if($errors->any())
+                <input type="checkbox" id='vineyard_{{$vineyard->id}}' name="vineyards[]" value={{$vineyard->id}} @checked(in_array($vineyard->id, old('vineyards', [])))>
+            @else
+                <input type="checkbox" id='vineyard_{{$vineyard->id}}' name="vineyards[]" value={{$vineyard->id}} @checked($wine->vineyards->contains($vineyard->id))>
+            @endif
+
+                <label for="vineyard_{{$vineyard->id}}">{{$vineyard->name}}</label>
+            @endforeach
+            @error('vineyard_id')
+              <div class="invalid-feedback">
+                {{$message}}
+              </div>
+            @enderror
+
+        </div>
+
+        <div class="row">
+
             <label for="color">Color</label>
             <input type="text" class="form-control @error('color') is-invalid @enderror" id="color" name="color" value="{{old('color') ?? $wine->color}}">
             @error('color')

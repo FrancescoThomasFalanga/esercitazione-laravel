@@ -12,6 +12,7 @@
                 <th scope="col">Name</th>
                 <th scope="col">Year</th>
                 <th scope="col">Winery</th>
+                <th scope="col">Vineyard</th>
                 <th scope="col">Color</th>
                 <th scope="col">Type</th>
                 <th scope="col">Gradation</th>
@@ -33,6 +34,11 @@
                     </td>
                     <td>
                         {{$wine->winery?->name}}
+                    </td>
+                    <td>
+                        @foreach($wine->vineyards as $vineyard)
+                            {{$vineyard->name}}
+                        @endforeach
                     </td>
                     <td>
                         {{$wine->color}}

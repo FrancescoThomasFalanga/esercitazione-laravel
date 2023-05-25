@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Vineyard;
 use App\Models\Wine;
 use App\Models\Winery;
 use Illuminate\Http\Request;
@@ -17,8 +18,9 @@ class AdminWineController extends Controller
     public function index()
     {
         $wines = Wine::all();
+        $vineyards = Vineyard::all();
 
-        return view('admin.wines.index', compact('wines'));
+        return view('admin.wines.index', compact('wines', 'vineyards'));
     }
 
     /**
@@ -29,7 +31,8 @@ class AdminWineController extends Controller
     public function create()
     {
         $wineries = Winery::all();
-        return view('admin.wines.create', compact('wineries'));
+        $vineyards = Vineyard::all();
+        return view('admin.wines.create', compact('wineries', 'vineyards'));
     }
 
     /**
@@ -59,6 +62,10 @@ class AdminWineController extends Controller
 
         $wine->save();
 
+        if(array_key_exists('vineyards', $form_data)){
+            $wine->vineyards()->attach($form_data['vineyards']);
+        }
+
         return redirect()->route('admin.wines.show', $wine);
     }
 
@@ -82,7 +89,8 @@ class AdminWineController extends Controller
     public function edit(Wine $wine)
     {
         $wineries = Winery::all();
-        return view('admin.wines.edit', compact('wine', 'wineries'));
+        $vineyards = Vineyard::all();
+        return view('admin.wines.edit', compact('wine', 'wineries', 'vineyards'));
     }
 
     /**
@@ -110,7 +118,13 @@ class AdminWineController extends Controller
 
         $wine->update($form_data);
 
-        $wine->save();
+        if(array_key_exists('vineyards', $form_data)){
+            $wine->vineyards()->sync($form_data['vineyards']);
+        } else{
+            $wine->vineyards()->detach();
+        }
+
+        // $wine->save();
 
         return redirect()->route('admin.wines.show', $wine);
     }
