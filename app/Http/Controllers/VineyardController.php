@@ -11,8 +11,16 @@ class VineyardController extends Controller
 
         $vineyards = Vineyard::all();
         
+        // if (request('search')) {
+        //     $vineyards = Vineyard::where('name', 'like', '%' . request('search') . '%')->get();
+        // } else {
+        //     $vineyards = Vineyard::all();
+        // }
+
         if (request('search')) {
-            $vineyards = Vineyard::where('name', 'like', '%' . request('search') . '%')->get();
+            $vineyards = Vineyard::where('name', 'like', '%' . request('search') . '%')
+                          ->orWhere('desc', 'like', '%' . request('search') . '%')
+                          ->get();
         } else {
             $vineyards = Vineyard::all();
         }

@@ -3,16 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\Wine;
-use App\Models\Winery;
 use Illuminate\Http\Request;
 
 class WineController extends Controller
 {
     public function index() {
 
-        // dd(request('search'));
+        // if (request('search')) {
+        //     $wines = Wine::where('name', 'like', '%' . request('search') . '%')->get();
+        // } else {
+        //     $wines = Wine::all();
+        // }
+
         if (request('search')) {
-            $wines = Wine::where('name', 'like', '%' . request('search') . '%')->get();
+            $wines = Wine::where('name', 'like', '%' . request('search') . '%')
+                          ->orWhere('year', 'like', '%' . request('search') . '%')
+                          ->orWhere('type', 'like', '%' . request('search') . '%')
+                          ->orWhere('gradation', 'like', '%' . request('search') . '%')
+                          ->orWhere('acidity', 'like', '%' . request('search') . '%')
+                          ->get();
         } else {
             $wines = Wine::all();
         }

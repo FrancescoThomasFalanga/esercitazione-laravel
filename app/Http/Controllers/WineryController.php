@@ -16,8 +16,22 @@ class WineryController extends Controller
     {
 
         // dd(request('search'));
+        // if (request('search')) {
+        //     $wineries = Winery::where('name', 'like', '%' . request('search') . '%')->get();
+        // } else {
+        //     $wineries = Winery::all();
+        // }
+
         if (request('search')) {
-            $wineries = Winery::where('name', 'like', '%' . request('search') . '%')->get();
+            $wineries = Winery::where('name', 'like', '%' . request('search') . '%')
+                                ->orWhere('address', 'like', '%' . request('search') . '%')
+                                ->orWhere('town', 'like', '%' . request('search') . '%')
+                                ->orWhere('district', 'like', '%' . request('search') . '%')
+                                ->orWhere('region', 'like', '%' . request('search') . '%')
+                                ->orWhere('nation', 'like', '%' . request('search') . '%')
+                                ->orWhere('phone_number', 'like', '%' . request('search') . '%')
+                                ->orWhere('mail', 'like', '%' . request('search') . '%')
+                                ->get();
         } else {
             $wineries = Winery::all();
         }
