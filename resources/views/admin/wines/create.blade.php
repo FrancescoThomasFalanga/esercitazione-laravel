@@ -38,12 +38,28 @@
 
         <div class="row">
 
-            <label for="winery">Winery</label>
+            {{-- <label for="winery">Winery</label>
             <input type="text" class="form-control @error('winery') is-invalid @enderror" id="winery" name="winery" value="{{old('winery')}}">
             @error('winery')
                 <div class="invalid-feedback">
                     {{$message}}
                 </div>
+            @enderror --}}
+
+            <label for="winery_id">Winery</label>
+            <select name="winery_id" id="winery_id" class="form-select @error('winery_id') is-invalid @enderror">
+              <option value="">Nessuna</option>
+              @foreach($wineries as $winery)
+                <option value="{{$winery->id}}" {{$winery->id == old('winery_id') ? 'selected' : ''}}>
+                  {{$winery->name}}
+                </option>
+              @endforeach
+            </select>
+
+            @error('winery_id')
+              <div class="invalid-feedback">
+                {{$message}}
+              </div>
             @enderror
             
 

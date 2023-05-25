@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Wine;
+use App\Models\Winery;
 use Illuminate\Http\Request;
 
 class AdminWineController extends Controller
@@ -27,7 +28,8 @@ class AdminWineController extends Controller
      */
     public function create()
     {
-        return view('admin.wines.create');
+        $wineries = Winery::all();
+        return view('admin.wines.create', compact('wineries'));
     }
 
     /**
@@ -41,7 +43,7 @@ class AdminWineController extends Controller
         $request->validate([
             'name' => 'required',
             'year' => 'required',
-            'winery' => 'required',
+            'winery_id' => 'required',
             'color' => 'required',
             'type' => 'required',
             'gradation' => 'required',

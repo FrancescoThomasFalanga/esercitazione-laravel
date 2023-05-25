@@ -8,7 +8,7 @@
         <div class="card-body">
             <h5 class="card-subtitle mb-2">{{ $wine->name }}</h5>
             <h6 class="card-subtitle mb-2">{{ $wine->type }}</h6>
-            <p class="card-text">{{ $wine->year }} - {{ $wine->winery }}</p>
+            <p class="card-text">{{ $wine->year }} - {{ $wine->winery->name }}</p>
             <p>Colore: {{ $wine->color }}</p>
             <p>Gradazione: {{ $wine->gradation }}%</p>
             <p>Estratto: {{ $wine->extract }}g/l</p>
