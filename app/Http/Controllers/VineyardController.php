@@ -10,8 +10,18 @@ class VineyardController extends Controller
     public function index() {
 
         $vineyards = Vineyard::all();
+        
+        if (request('search')) {
+            $vineyards = Vineyard::where('name', 'like', '%' . request('search') . '%')->get();
+        } else {
+            $vineyards = Vineyard::all();
+        }
 
-        return view('vitigni', compact('vineyards'));
+        return view('guest.vineyards.index', compact('vineyards'));
 
+    }
+
+    public function show(Vineyard $vineyard){
+        return view('guest.vineyards.show', compact('vineyard'));
     }
 }

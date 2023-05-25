@@ -18,17 +18,24 @@ class WineController extends Controller
         }
 
 
-        return view('vini')->with('wines', $wines);
+        return view('guest/wine/index')->with('wines', $wines);
 
     }
 
-    public function extra() {
-
-        $wines = Wine::all();
-
-        $index = request('index');
-
-        return view('viniExtra', compact('wines', 'index'));
-
+    public function show(Wine $wine)
+    {
+        return view('guest.wine.show', compact('wine'));
     }
+
+
+
+    // public function extra() {
+
+    //     $wines = Wine::all();
+
+    //     $index = request('index');
+
+    //     return view('viniExtra', compact('wines', 'index'));
+
+    // }
 }

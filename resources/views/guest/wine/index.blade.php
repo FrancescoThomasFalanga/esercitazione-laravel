@@ -20,19 +20,19 @@
 
         @foreach ($wines as $wine)
             
-            <div class="card" style="width: 18rem;">
+            <a href="{{route('wines.show', $wine)}}" class="card" style="width: 18rem;">
                 <div class="card-body">
-                    <a href="{{route('viniExtra')}}?index={{$loop->index}}">
-                        <h5 class="card-title p-2 text-center {{ $wine->color }}">{{ $wine->name }} <i class="fa-solid fa-wine-glass"></i></h5>
-                    </a>
+                    {{-- <a href="{{route('viniExtra')}}?index={{$loop->index}}">
+                    </a> --}}
+                    <h5 class="card-title p-2 text-center {{ $wine->color }}">{{ $wine->name }} <i class="fa-solid fa-wine-glass"></i></h5>
                     <h6 class="card-subtitle mb-2">{{ $wine->type }}</h6>
-                    <p class="card-text">{{ $wine->year }} - {{ $wine->winery }}</p>
+                    <p class="card-text">{{ $wine->year }} - {{ $wine->winery?->name }}</p>
                     <p>Colore: {{ $wine->color }}</p>
                     <p>Gradazione: {{ $wine->gradation }}%</p>
                     <p>Estratto: {{ $wine->extract }}g/l</p>
                     <p>Acidità: {{ $wine->acidity }}g/l</p>
                 </div>
-            </div>
+            </a>
 
         @endforeach
 

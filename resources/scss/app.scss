@@ -39,4 +39,22 @@ a {
         text-decoration: underline;
         color: black;
     }
+
+    
+    
+    &.card{
+        &:hover{
+            text-decoration: none;
+            transform: scale(1.05);
+        }
+    }
+
 }
+
+.card{
+    transition: transform .3s ease;
+    &:hover{
+        transform: scale(1.06);
+    }
+}
+

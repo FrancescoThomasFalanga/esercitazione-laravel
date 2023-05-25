@@ -36,11 +36,12 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
+// Guest
 Route::resource('wineries', WineryController::class);
 Route::resource('wines', WineController::class);
 Route::resource('vineyards', VineyardController::class);
 
+// Admin
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function() {
 
     Route::get('dashboard', [DashboardController::class, 'home']);
