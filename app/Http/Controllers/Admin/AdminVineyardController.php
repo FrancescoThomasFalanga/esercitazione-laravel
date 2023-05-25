@@ -15,9 +15,9 @@ class AdminVineyardController extends Controller
      */
     public function index()
     {
-        $vineyard = Vineyard::all();
+        $vineyards = Vineyard::all();
 
-        return view('admin.vineyard.index', compact('vineyard'));
+        return view('admin.vineyards.index', compact('vineyards'));
     }
 
     /**
@@ -27,7 +27,7 @@ class AdminVineyardController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.vineyards.create');
     }
 
     /**
@@ -38,7 +38,20 @@ class AdminVineyardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'desc' => 'required',
+        ]);
+
+        $form_data = $request->all();
+
+        $vineyard = new Vineyard();
+
+        $vineyard->fill($form_data);
+
+        $vineyard->save();
+
+        return redirect()->route('admin.vineyards.show', $vineyard);
     }
 
     /**
@@ -60,7 +73,7 @@ class AdminVineyardController extends Controller
      */
     public function edit(Vineyard $vineyard)
     {
-        //
+        return view('admin.vineyards.edit', compact('vineyard'));
     }
 
     /**
@@ -72,7 +85,18 @@ class AdminVineyardController extends Controller
      */
     public function update(Request $request, Vineyard $vineyard)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'desc' => 'required',
+        ]);
+
+        $form_data = $request->all();
+
+        $vineyard->update($form_data);
+
+        $vineyard->save();
+
+        return redirect()->route('admin.vineyards.show', $vineyard);
     }
 
     /**
@@ -83,6 +107,8 @@ class AdminVineyardController extends Controller
      */
     public function destroy(Vineyard $vineyard)
     {
-        //
+        $vineyard->delete();
+
+        return redirect()->route('admin.vineyards.index');
     }
 }
