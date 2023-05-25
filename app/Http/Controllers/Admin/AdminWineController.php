@@ -81,7 +81,8 @@ class AdminWineController extends Controller
      */
     public function edit(Wine $wine)
     {
-        return view('admin.wines.edit', compact('wine'));
+        $wineries = Winery::all();
+        return view('admin.wines.edit', compact('wine', 'wineries'));
     }
 
     /**
@@ -97,7 +98,7 @@ class AdminWineController extends Controller
         $request->validate([
             'name' => 'required',
             'year' => 'required',
-            'winery' => 'required',
+            'winery_id' => 'required',
             'color' => 'required',
             'type' => 'required',
             'gradation' => 'required',
