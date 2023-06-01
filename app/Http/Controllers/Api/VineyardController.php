@@ -3,33 +3,32 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Winery;
+use App\Models\Vineyard;
 use Illuminate\Http\Request;
 
-class WineryController extends Controller
+class VineyardController extends Controller
 {
     public function index(){
-        // $wines = Wine::all();
-        $wineries = Winery::with('wines')->get();
+        $vineyards = Vineyard::with('wines')->get();
 
         return response()->json([
           'success' => true,
-          'results' => $wineries,
+          'results' => $vineyards,
         ]);
     }
 
     public function show($id){
-      $winery = Winery::where('id', $id)->with('wines')->first();
+      $vineyard = Vineyard::where('id', $id)->with('wines')->first();
 
-      if($winery){
+      if($vineyard){
         return response()->json([
           'success' => true,
-          'winery' => $winery,
+          'vineyard' => $vineyard,
         ]);
       } else {
         return response()->json([
           'success' => false,
-          'error' => 'La cantina selezionato non esiste',
+          'error' => 'Il vitigno selezionato non esiste',
         ]);
       }
     }

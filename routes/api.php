@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\VineyardController;
 use App\Http\Controllers\Api\WineController;
 use App\Http\Controllers\Api\WineryController;
 use Illuminate\Http\Request;
@@ -24,7 +25,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('wines', [WineController::class, 'index']);
 Route::get('wines/{id}', [WineController::class, 'show']);
 
-
 // Wineries
 Route::get('wineries', [WineryController::class, 'index']);
 Route::get('wineries/{id}', [WineryController::class, 'show']);
+
+// Vineyards
+Route::get('vineyards', [VineyardController::class, 'index']);
+Route::get('vineyards/{id}', [VineyardController::class, 'show']);
